@@ -8,7 +8,17 @@ const opts = Object.assign({
   timestamp: () => {return `, "time": "${new Date().toISOString()}"`;}
 }, {level: process.env.LOGLEVEL || 'info'});
 const logger = require('pino')(opts);
+{% if handleRegister %}
+const {initLocals, checkCache, challenge} = require('./lib/middleware')(logger);
+const regParser = require('drachtio-mw-registration-parser');
+const Registrar = require('@jambonz/mw-registrar');
+srf.locals.registrar = new Registrar(logger, {
+  host: process.env.REDIS_HOST || '127.0.0.1',
+  port: process.env.REDIS_PORT || 6379
+});
+{% else %}
 const {initLocals} = require('./lib/middleware')(logger);
+{% endif %}
 {% if handleInvite %}
 const CallSession = require('./lib/call-session');
 {% endif %}
@@ -46,6 +56,25 @@ srf.invite([initLocals], (req, res) => {
   const session = new CallSession(req, res);
   session.connect();
 });
+{% endif %}
+{% if handleRegister %}
+srf.use('register', [initLocals, regParser, checkCache, challenge]);
+srf.register(require('./lib/register')({logger}));
+{% endif %}
+{% if handleSubscribe %}
+srf.subscribe(require('./lib/subscribe')({logger}));
+{% endif %}
+{% if handlePublish %}
+srf.publish(require('./lib/publish')({logger}));
+{% endif %}
+{% if handleMessage %}
+srf.message(require('./lib/message')({logger}));
+{% endif %}
+{% if handleOptions %}
+srf.options(require('./lib/options')({logger}));
+{% endif %}
+{% if handleInfo %}
+srf.info(require('./lib/info')({logger}));
 {% endif %}
 
 if ('test' === process.env.NODE_ENV) {

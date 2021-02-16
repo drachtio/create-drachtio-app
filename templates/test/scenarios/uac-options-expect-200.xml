@@ -38,7 +38,7 @@
     ]]>
   </send>
 
-  <recv response="480" rtd="true"/>
+  <recv response="200" rtd="true"/>
 
 </scenario>
 

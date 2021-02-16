@@ -24,18 +24,32 @@ obj.output = () => {
   return output;
 };
 
-obj.sippUac = (file, bindAddress) => {
+obj.sippUac = (file, bindAddress, injectionFile) => {
   const cmd = 'docker';
-  const args = [
-    'run', '-t', '--rm', '--net', `${network}`,
-    '-v', `${__dirname}/scenarios:/tmp/scenarios`,
-    'drachtio/sipp', 'sipp', '-sf', `/tmp/scenarios/${file}`,
-    '-m', '1',
-    '-sleep', '250ms',
-    '-nostdin',
-    '-cid_str', `%u-%p@%s-${idx++}`,
-    '172.32.0.50'
-  ];
+  let args;
+  if (injectionFile) {
+    args = [
+      'run', '-t', '--rm', '--net', `${network}`,
+      '-v', `${__dirname}/scenarios:/tmp/scenarios`,
+      'drachtio/sipp', 'sipp', '-sf', `/tmp/scenarios/${file}`,
+      '-inf', `/tmp/scenarios/${injectionFile}`,
+      '-m', '1',
+      '-sleep', '250ms',
+      '-nostdin',
+      '-cid_str', `%u-%p@%s-${idx++}`,
+      '172.32.0.50'];
+  }
+  else {
+    args = [
+      'run', '-t', '--rm', '--net', `${network}`,
+      '-v', `${__dirname}/scenarios:/tmp/scenarios`,
+      'drachtio/sipp', 'sipp', '-sf', `/tmp/scenarios/${file}`,
+      '-m', '1',
+      '-sleep', '250ms',
+      '-nostdin',
+      '-cid_str', `%u-%p@%s-${idx++}`,
+      '172.32.0.50'];
+  }
 
   if (bindAddress) args.splice(5, 0, '--ip', bindAddress);
 
@@ -60,7 +74,7 @@ obj.sippUac = (file, bindAddress) => {
       //console.log(`stdout: ${data}`);
       addOutput(data.toString());
     });
-    child_process.stdout.on('data', (data) => {
+    child_process.stderr.on('data', (data) => {
       //console.log(`stdout: ${data}`);
       addOutput(data.toString());
     });

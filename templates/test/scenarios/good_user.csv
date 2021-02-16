@@ -1,0 +1,3 @@
+SEQUENTIAL
+# user, domain, authentication
+foo;drachtio.org;[authentication username=foo password=bar]

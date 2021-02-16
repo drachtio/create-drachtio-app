@@ -17,17 +17,9 @@ services:
         ipv4_address: 172.32.0.6
 {% endif %}
 
-  docker-host:
-    image: qoomon/docker-host
-    cap_add: [ 'NET_ADMIN', 'NET_RAW' ]
-    mem_limit: 8M
-    restart: on-failure
-    networks:
-      drachtio:
-        ipv4_address: 172.32.0.7
-
   drachtio:
     image: drachtio/drachtio-server:latest
+    container_name: drachtio.org
     restart: always
     command: drachtio --contact "sip:*;transport=udp,tcp" --address 0.0.0.0 --port 9022
     ports:
@@ -57,6 +49,26 @@ services:
     networks:
       drachtio:
         ipv4_address: 172.32.0.51
+
+  docker-host:
+    image: qoomon/docker-host
+    cap_add: [ 'NET_ADMIN', 'NET_RAW' ]
+    mem_limit: 8M
+    restart: on-failure
+    networks:
+      drachtio:
+        ipv4_address: 172.32.0.7
+
+{% endif %}
+
+{% if handleRegister %}
+  redis:
+    image: redis:5-alpine
+    ports:
+      - "16379:6379/tcp"
+    networks:
+      drachtio:
+        ipv4_address: 172.32.0.52
 {% endif %}
 
   uas:

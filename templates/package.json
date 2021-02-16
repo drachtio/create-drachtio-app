@@ -1,35 +1,18 @@
 {
   "name": "{{ appName }}",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "starter drachtio app",
+  "main": "app.js",
   "scripts": {
 {% if test %}
   "start": "node app",
-    "test": "NODE_ENV=test LOGLEVEL=error DRACHTIO_PORT=9060 FREESWITCH_PORT=8022 node test/ | ./node_modules/.bin/tap-spec",
-    "coverage": "NODE_ENV=test DRACHTIO_PORT=9060 FREESWITCH_PORT=8022  ./node_modules/.bin/nyc --reporter html --report-dir ./coverage npm run test",
+    "test": "NODE_ENV=test LOGLEVEL=error DRACHTIO_PORT=9060 FREESWITCH_PORT=8022 REDIS_PORT=16379 node test/ | ./node_modules/.bin/tap-spec",
+    "coverage": "NODE_ENV=test DRACHTIO_PORT=9060 FREESWITCH_PORT=8022 REDIS_PORT=16379 ./node_modules/.bin/nyc --reporter html --report-dir ./coverage npm run test",
     "jslint": "eslint app.js lib"
 {% else %}
   "test": "echo \"Error: no test specified\" && exit 1"
 {% endif %}
   },
   "author": "",
-  "license": "MIT",
-  "dependencies": {
-{% if media %}
-    "drachtio-fsmrf": "^2.0.5",
-{% endif %}
-    "drachtio-srf": "^4.4.47",
-    "pino": "^6.11.1"
-  },
-  "devDependencies": {
-{% if test %}
-    "blue-tape": "^1.0.0",
-    "nyc": "^15.1.0",
-    "tap-spec": "^5.0.0",
-    "clear-module": "^4.1.1",
-{% endif %}
-    "eslint": "^7.20.0",
-    "eslint-plugin-promise": "^4.3.1"
-  }
+  "license": "MIT"
 }

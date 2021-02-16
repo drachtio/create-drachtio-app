@@ -4,6 +4,8 @@ const {parseUri} = require('drachtio-srf');
 {% else %}
 const {parseUri, SipError} = require('drachtio-srf');
 {% endif %}
+const debug = require('debug')('drachtio:{{ appName }}');
+
 class CallSession extends Emitter {
   constructor(req, res) {
     super();
@@ -18,6 +20,7 @@ class CallSession extends Emitter {
 
   async connect() {
     const uri = parseUri(this.req.uri);
+    debug({uri, sdp: this.req.body}, 'incoming call received');
     this.logger.info({uri}, 'inbound call accepted for routing');
 
 {% if media %}
@@ -38,7 +41,7 @@ class CallSession extends Emitter {
       const {uas, uac} = await this.srf.createB2BUA(this.req, this.res, 'sip:172.32.0.60');
       this.logger.info('call connected successfully');
       [uas, uac].forEach((dlg) => dlg.on('destroy', () => {
-        this.logger.info('call ended'); 
+        this.logger.info('call ended');
         dlg.other.destroy();
       }));
     } catch (err) {
