@@ -60,7 +60,7 @@ $ npm run coverage
 $ npm run jslint
 ```
 
-**Hint**: It is a good idea to continue to keep your test cases updated, and to build new ones to cover the additional functionality that 
+**Hint**: It is a good idea to continue to keep your test cases updated, and to build new ones to cover the additional functionality that you add over time.
 {% else %}
 Well, you chose not to generate the test suite when you generated the project so we got nothing for you.  You may want to go back and re-generate the project using the `--test` flag to get an initial docker-based test suite.  Just a suggestion.
 {% endif %}
