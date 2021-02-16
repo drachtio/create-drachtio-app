@@ -4,7 +4,7 @@ Usage: npx create-drachtio-app [options] project-name
 ```
 Options:
   -h, --help                        display help for command
-  -m, --media                       include the [drachtio-fsmrf](https://www.npmjs.com/package/drachtio-fsmrf) package for media control
+  -m, --media                       include the drachtio-fsmrf package for media control
   -r, --request-types <methods...>  list the SIP request types to handle, or 'all' (default: ["invite"])
   -t, --test                        generate a docker-based test suite
   -v, --version                     display the current version
@@ -15,7 +15,7 @@ Options:
 Scaffold an application that wants to handle INVITEs and REGISTERs, with a test suite and with media control support
 
 ```bash
-  $ create-drachtio-app -m -t -r invite register my-app
+  $ npx create-drachtio-app -m -t -r invite register my-app
 
 Creating a new drachtio app in ../my-app
 

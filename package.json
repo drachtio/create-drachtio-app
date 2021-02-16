@@ -1,6 +1,6 @@
 {
   "name": "create-drachtio-app",
-  "version": "0.0.12",
+  "version": "0.0.14",
   "description": "Scaffold a drachtio application",
   "main": "bin/index.js",
   "bin": {
