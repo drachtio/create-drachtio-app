@@ -1,13 +1,13 @@
 {
   "name": "create-drachtio-app",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Scaffold a drachtio application",
   "main": "bin/index.js",
   "bin": {
     "create-drachtio-app": "./bin/index.js"
   },
   "scripts": {
-    "start": "node bin/index.js start",
+    "start": "node bin/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Dave Horton",
