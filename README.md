@@ -15,7 +15,7 @@ Options:
 Scaffold an application that wants to handle INVITEs and REGISTERs, with a test suite and with media control support
 
 ```bash
-  $ create-drachtio-app -m -t invite register my-app
+  $ create-drachtio-app -m -t -r invite register my-app
 
 Creating a new drachtio app in ../my-app
 
