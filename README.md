@@ -1,6 +1,6 @@
 # create-drachtio-app
 
-Usage: create-drachtio-app [options] project-name
+Usage: npx create-drachtio-app [options] project-name
 
 Options:
   -h, --help                        display help for command
