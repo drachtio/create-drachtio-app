@@ -36,6 +36,5 @@ Creating a new drachtio app in ../my-app
   total:     3
   passing:   3
   duration:  7.3s
-
 ```
 
