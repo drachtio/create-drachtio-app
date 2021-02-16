@@ -1,14 +1,14 @@
 # create-drachtio-app ![CI](https://github.com/drachtio/create-drachtio-app/workflows/CI/badge.svg)
 
 Usage: npx create-drachtio-app [options] project-name
-
+```
 Options:
   -h, --help                        display help for command
   -m, --media                       include the [drachtio-fsmrf](https://www.npmjs.com/package/drachtio-fsmrf) package for media control
   -r, --request-types <methods...>  list the SIP request types to handle, or 'all' (default: ["invite"])
   -t, --test                        generate a docker-based test suite
   -v, --version                     display the current version
-
+```
 
 **Example**: 
 
