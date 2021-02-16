@@ -125,10 +125,10 @@ const spawnCommand = (cmd, args) => {
     });
 
     child_process.stdout.on('data', (data) => {
-      console.log(data.toString());
+      //console.log(data.toString());
     });
     child_process.stderr.on('data', (data) => {
-      console.log(data.toString());
+      //console.log(data.toString());
     });
   });
 
