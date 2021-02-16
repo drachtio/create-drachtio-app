@@ -13,5 +13,5 @@ jobs:
         with:
           node-version: 14
       - run: npm install
-      - run: npm start -- -t -m -r all temp && cd temp && npm test
+      - run: npm start -- -t -r all temp && cd temp && npm test
 
