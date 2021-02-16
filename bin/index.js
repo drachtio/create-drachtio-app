@@ -19,7 +19,7 @@ program.parse();
 const opts = program.opts();
 opts.requestTypes = opts.requestTypes.map((r) => r.toLowerCase());
 
-nunjucks.configure(`${__dirname}/templates`, {
+nunjucks.configure(`${__dirname}/../templates`, {
   lstripBlocks: true,
   trimBlocks: true
 });
@@ -85,4 +85,4 @@ const renderFolder = (folder, target, inTest = false) => {
 }
 
 
-renderFolder(`${__dirname}/templates`, process.cwd());
+renderFolder(`${__dirname}/../templates`, process.cwd());
