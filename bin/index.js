@@ -27,7 +27,8 @@ const pluginFiles = {
   message: ['message.js']
 };
 
-program.version('0.0.11', '-v, --version', 'display the current version');
+const pkg = require(`${__dirname}/../package.json`);
+program.version(pkg.version, '-v, --version', 'display the current version');
 program
 .name('create-drachtio-app')
 .usage('[options] project-name')
