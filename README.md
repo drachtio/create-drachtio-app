@@ -21,9 +21,6 @@ Creating a new drachtio app in ../my-app
 
   $ cd my-app
   $ npm test
-> my-app@1.0.0 test /Users/dhorton/beachdog-enterprises/beachdog-networks/git/temp/my-app
-> NODE_ENV=test LOGLEVEL=error DRACHTIO_PORT=9060 FREESWITCH_PORT=8022 REDIS_PORT=16379 node test/ | ./node_modules/.bin/tap-spec
-
 
   starting docker network..
 
@@ -35,8 +32,6 @@ Creating a new drachtio app in ../my-app
     ✔ register test passes
 
   stopping docker network..
-
-
 
   total:     3
   passing:   3
