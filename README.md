@@ -17,7 +17,7 @@ Scaffold an application that wants to handle INVITEs and REGISTERs, with a test 
 ```bash
   $ npx create-drachtio-app -m -t -r invite register my-app
 
-Creating a new drachtio app in ../my-app
+Creating a new drachtio app in /Users/perpich/test/my-app
 
   $ cd my-app
   $ npm test
