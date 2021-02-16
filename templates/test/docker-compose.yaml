@@ -1,0 +1,71 @@
+version: '3.9'
+networks:
+  drachtio:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.32.0.0/16
+
+services:
+{% if redis %}
+  redis:
+    image: redis:5-alpine
+    ports:
+      - "16379:6379/tcp"
+    networks:
+      drachtio:
+        ipv4_address: 172.32.0.6
+{% endif %}
+
+  docker-host:
+    image: qoomon/docker-host
+    cap_add: [ 'NET_ADMIN', 'NET_RAW' ]
+    mem_limit: 8M
+    restart: on-failure
+    networks:
+      drachtio:
+        ipv4_address: 172.32.0.7
+
+  drachtio:
+    image: drachtio/drachtio-server:latest
+    restart: always
+    command: drachtio --contact "sip:*;transport=udp,tcp" --address 0.0.0.0 --port 9022
+    ports:
+      - "9060:9022/tcp"
+{% if media %}
+    depends_on:
+      freeswitch:
+        condition: service_healthy
+{% endif %}
+    networks:
+      drachtio:
+        ipv4_address: 172.32.0.50
+
+{% if media %}
+  freeswitch:
+    image: drachtio/drachtio-freeswitch-mrf:v1.10.1-full
+    restart: always
+    command: freeswitch --rtp-range-start 20000 --rtp-range-end 20100
+    healthcheck:
+      test: ["CMD", "fs_cli" ,"-x", "sofia status"]
+      timeout: 5s
+      retries: 20
+    ports:
+      - "8022:8021/tcp"
+    volumes:
+      - /tmp:/tmp
+    networks:
+      drachtio:
+        ipv4_address: 172.32.0.51
+{% endif %}
+
+  uas:
+    image: drachtio/sipp:latest
+    command: sipp -sf /tmp/uas.xml
+    volumes:
+      - ./scenarios:/tmp
+    tty: true
+    networks:
+      drachtio:
+        ipv4_address: 172.32.0.60
+
