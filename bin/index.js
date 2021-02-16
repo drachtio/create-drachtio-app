@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const nunjucks = require('nunjucks');
 const { program } = require('commander');
 const fs = require('fs');
