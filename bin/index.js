@@ -34,7 +34,7 @@ program
 .addHelpText('after', `
 
 Example:
-  $ create-drachtio-app -m -t invite register subscribe my-app`)
+  $ create-drachtio-app -m -t -r invite register subscribe my-app`)
 .option('-m, --media', 'include the drachtio-fsmrf pckage for media control')
 .option('-r, --request-types <methods...>', 'list the SIP request types to handle, or \'all\'; e.g. invite register...', ['invite'])
 .option('-t, --test', 'generate a docker-based test suite')
