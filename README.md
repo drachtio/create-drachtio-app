@@ -1,4 +1,4 @@
-# create-drachtio-app
+# create-drachtio-app ![CI](https://github.com/drachtio/create-drachtio-app/workflows/CI/badge.svg)
 
 Usage: npx create-drachtio-app [options] project-name
 
