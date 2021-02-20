@@ -1,4 +1,4 @@
-const test = require('blue-tape');
+const test = require('tape');
 const { sippUac } = require('./sipp')('test_drachtio');
 const clearModule = require('clear-module');
 
@@ -17,6 +17,10 @@ function connect(connectable) {
 test('sip tests', async(t) => {
   clearModule.all();
   const {srf, disconnect} = require('../app');
+
+  t.teardown(() => {
+    disconnect();
+  });
 
   try {
     await connect(srf);
@@ -48,10 +52,9 @@ test('sip tests', async(t) => {
     await sippUac('uac-info-expect-480.xml', '172.32.0.10');
     t.pass('info test passes');
 {% endif %}
-    disconnect();
+    t.end();
   } catch (err) {
     console.log(`error received: ${err}`);
-    disconnect();
-    t.error(err);
+    t.end(err);
   }
 });

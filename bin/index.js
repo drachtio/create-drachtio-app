@@ -151,7 +151,7 @@ const spawnCommand = (cmd, args) => {
       '@jambonz/mw-registrar']);
   }
   if (opts.test) {
-    Array.prototype.push.apply(devPackages, ['blue-tape', 'nyc', 'tap-spec', 'clear-module', 'async']);
+    Array.prototype.push.apply(devPackages, ['tape', 'nyc', 'tap-spec', 'clear-module', 'async']);
   }
   
   console.log('Installing packages.  This might take a few seconds...');
